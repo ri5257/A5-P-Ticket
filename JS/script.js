@@ -1,4 +1,3 @@
-console.log("connected");
 let count = 0;
 let total = 0;
 let countButton = 0;
@@ -92,14 +91,14 @@ const discountInput = document.querySelector("#discount-in");
 let DISCOUNT = 0;
 applyInput.addEventListener("keyup", function (event) {
     if (event.target.value === "NEW15" && countButton >= 4) {
-        DISCOUNT = total * 15/100;
+        DISCOUNT = total * 15 / 100;
         discountBtn.addEventListener("click", function () {
             document.querySelector("#grand-total").innerText = total - DISCOUNT;
         });
 
         discountBtn.classList.remove("btn-disabled");
     } else if (event.target.value === "Couple 20" && countButton >= 4) {
-        DISCOUNT = total * 20/100;
+        DISCOUNT = total * 20 / 100;
         discountBtn.addEventListener("click", function () {
             document.querySelector("#grand-total").innerText = total - DISCOUNT;
         });
