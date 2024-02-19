@@ -39,7 +39,7 @@ for (let btn of btnSeats) {
         appendParagraph(seatNumber, e.target.innerText);
         appendParagraph(seatClass, "Economy");
         appendParagraph(seatPrice, "550");
-        e.target.classList.toggle("bg-green-500");
+        e.target.classList.toggle("bg-yellow-400");
         e.target.classList.toggle("cursor-not-allowed");
         e.target.classList.toggle("pointer-events-none");
 
