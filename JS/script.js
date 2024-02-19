@@ -1,3 +1,4 @@
+console.log("connected");
 let count = 0;
 let total = 0;
 let countButton = 0;
