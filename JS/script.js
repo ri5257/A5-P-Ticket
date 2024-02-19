@@ -1,24 +1,24 @@
-const btnSeats = document.querySelectorAll(".btn-seat");
 let count = 0;
 let total = 0;
-let btnCount = 0;
+let countButton = 0;
+const seatButtons = document.querySelectorAll(".seat-button");
 
-for (let btn of btnSeats) {
-    btn.addEventListener("click", function (e) {
-        e.target.classList.toggle("clicked-btn");
-        if (e.target.classList.contains("clicked-btn")) {
-            btnCount++;
+for (let btn of seatButtons) {
+    btn.addEventListener("click", function (event) {
+        event.target.classList.toggle("clicked-btn");
+        if (event.target.classList.contains("clicked-btn")) {
+            countButton++;
         } else {
-            btnCount--;
+            countButton--;
         }
-        if (btnCount >= 4) {
-            for (let btn of btnSeats) {
+        if (countButton >= 4) {
+            for (let btn of seatButtons) {
                 if (!btn.classList.contains("clicked-btn")) {
                     btn.disabled = true;
                 }
             }
         } else {
-            for (let btn of btnSeats) {
+            for (let btn of seatButtons) {
                 btn.disabled = false;
             }
         }
@@ -36,32 +36,31 @@ for (let btn of btnSeats) {
         indicator.innerText = count;
         const seatUpdate = document.querySelector(".seat-update");
 
-        appendParagraph(seatNumber, e.target.innerText);
+        appendParagraph(seatNumber, event.target.innerText);
         appendParagraph(seatClass, "Economy");
         appendParagraph(seatPrice, "550");
-        e.target.classList.toggle("bg-yellow-400");
-        e.target.classList.toggle("cursor-not-allowed");
-        e.target.classList.toggle("pointer-events-none");
+        event.target.classList.toggle("bg-yellow-400");
+        event.target.classList.toggle("cursor-not-allowed");
+        event.target.classList.toggle("pointer-events-none");
 
         let totalPrice = parseInt(document.querySelector("#total-price").innerText);
         console.log(totalPrice);
         total = totalPrice + parseInt(550);
         document.querySelector("#total-price").innerText = total;
 
-        document.querySelector("#grand-total-price").innerText = total;
+        document.querySelector("#grand-total").innerText = total;
 
         const phoneNumber = document.querySelector("#phone-number");
         const nextBtn = document.querySelector("#next");
-        phoneNumber.addEventListener("keyup", (e) => {
-            if (e.target.value > 0) {
+        phoneNumber.addEventListener("keyup", (event) => {
+            if (event.target.value > 0) {
                 nextBtn.classList.remove("btn-disabled");
             } else {
                 nextBtn.classList.add("btn-disabled");
             }
-            console.log(e.target.value > 0);
+            console.log(event.target.value > 0);
         });
         phoneNumber.value = "";
-        //     console.log(phoneNumber.value.length > 0);
         applyInput.value = "";
     });
 }
@@ -79,29 +78,29 @@ document.querySelector("#next").addEventListener("click", function () {
     document.querySelector("#success").classList.remove("hidden");
 });
 
-document.querySelector("#Continue").addEventListener("click", function () {
+document.querySelector("#continue").addEventListener("click", function () {
     document.querySelector("footer").classList.remove("hidden");
     document.querySelector("main").classList.remove("hidden");
     document.querySelector("header").classList.remove("hidden");
     document.querySelector("#success").classList.add("hidden");
 })
 
-const applyInput = document.querySelector("#apply-input");
-const discountBtn = document.querySelector("#apply-btn");
-const discountInput = document.querySelector("#discount-input");
+const applyInput = document.querySelector("#apply-in");
+const discountBtn = document.querySelector("#apply-button");
+const discountInput = document.querySelector("#discount-in");
 let DISCOUNT = 0;
-applyInput.addEventListener("keyup", function (e) {
-    if (e.target.value === "NEW15" && btnCount >= 4) {
-        DISCOUNT = total * 0.15;
+applyInput.addEventListener("keyup", function (event) {
+    if (event.target.value === "NEW15" && countButton >= 4) {
+        DISCOUNT = total * 15/100;
         discountBtn.addEventListener("click", function () {
-            document.querySelector("#grand-total-price").innerText = total - DISCOUNT;
+            document.querySelector("#grand-total").innerText = total - DISCOUNT;
         });
 
         discountBtn.classList.remove("btn-disabled");
-    } else if (e.target.value === "Couple 20" && btnCount >= 4) {
-        DISCOUNT = total * 0.2;
+    } else if (event.target.value === "Couple 20" && countButton >= 4) {
+        DISCOUNT = total * 20/100;
         discountBtn.addEventListener("click", function () {
-            document.querySelector("#grand-total-price").innerText = total - DISCOUNT;
+            document.querySelector("#grand-total").innerText = total - DISCOUNT;
         });
         discountBtn.classList.remove("btn-disabled");
     } else {
@@ -110,7 +109,7 @@ applyInput.addEventListener("keyup", function (e) {
 });
 let totalDis = 0;
 discountBtn.addEventListener("click", function () {
-    const discountDiv = document.querySelector("#discount-div");
+    const discountDiv = document.querySelector("#discount-apply");
 
     discountDiv.innerHTML = `
 <h1>Discounted Price</h1>
